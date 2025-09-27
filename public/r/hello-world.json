@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hello-world",
+  "type": "registry:component",
+  "title": "Hello World",
+  "description": "A simple hello world component",
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ritu/blocks/test-button/test.tsx",
+      "content": "export function HelloWorld() {\r\n  return <h1 className=\"text-2xl font-bold\">Hello World</h1>\r\n}",
+      "type": "registry:component"
+    }
+  ]
+}
