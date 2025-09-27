@@ -12,7 +12,7 @@
       "path": "src/registry/ritu/blocks/test-button/test.tsx",
       "content": "export function HelloWorld() {\r\n  return <h1 className=\"text-2xl font-bold\">Hello World</h1>\r\n}",
       "type": "registry:component",
-      "target": "app/ritu/test.tsx"
+      "target": "app/component/ritu/test.tsx"
     }
   ]
 }
