@@ -11,7 +11,7 @@
       "registryDependencies": ["button"],
       "files": [
         {
-          "path": "registry/ritu/blocks/hello-world/hello-world.tsx",
+          "path": "src/registry/ritu/blocks/test-button/test.tsx",
           "type": "registry:component"
         }
       ]
