@@ -49,7 +49,7 @@ export default function IndexPage() {
         <PageHeaderDescription>{description}</PageHeaderDescription>
       </PageHeader>
 
-      <div className="relative my-16 max-w-6xl mx-auto w-full">
+      <div className="relative my-16 max-w-6xl mx-auto w-full px-4">
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {categories
             .sort((a, b) => {
