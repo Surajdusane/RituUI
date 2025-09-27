@@ -12,7 +12,8 @@
       "files": [
         {
           "path": "src/registry/ritu/blocks/test-button/test.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "app/ritu/test.tsx"
         }
       ]
     }
