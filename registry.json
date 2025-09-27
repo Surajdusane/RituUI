@@ -13,7 +13,7 @@
         {
           "path": "src/registry/ritu/blocks/test-button/test.tsx",
           "type": "registry:component",
-          "target": "app/component/ritu/test.tsx"
+          "target": "app/components/ritu/test.tsx"
         }
       ]
     }
