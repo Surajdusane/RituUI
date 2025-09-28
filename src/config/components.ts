@@ -79,6 +79,24 @@ export const categories: ComponentCategory[] = [
       { name: "comp-465" },
     ],
   },
+  {
+    slug: "ritu",
+    name: "ritu",
+    components: [
+      { name: "comp-454" },
+      { name: "comp-455" },
+      { name: "comp-456" },
+      { name: "comp-457" },
+      { name: "comp-458" },
+      { name: "comp-459" },
+      { name: "comp-460" },
+      { name: "comp-461" },
+      { name: "comp-462" },
+      { name: "comp-463" },
+      { name: "comp-464" },
+      { name: "comp-465" },
+    ],
+  },
 ]
 
 export function getCategory(slug: string): ComponentCategory | undefined {
