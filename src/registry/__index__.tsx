@@ -17,7 +17,7 @@ export const Index: Record<string, any> = {
     },{
       path: "src/registry/ritu/blocks/login-form-1/components/login-form.tsx",
       type: "registry:component",
-      target: "app/components/ritutest/login-form.tsx"
+      target: ""
     }],
     component: React.lazy(async () => {
       const mod = await import("@/registry/ritu/blocks/login-form-1/page.tsx")
