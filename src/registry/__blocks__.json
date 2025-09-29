@@ -2,8 +2,11 @@
   {
     "name": "login-form-1",
     "description": "A login for its just a test desciption.",
-    "categories": [
-      "login"
-    ]
+    "categories": ["login"]
+  },
+  {
+    "name": "copy-button-01",
+    "description": "A copy butoon with smooth animation.",
+    "categories": ["utilities"]
   }
 ]

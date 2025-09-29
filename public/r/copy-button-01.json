@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copy-button-01",
+  "type": "registry:block",
+  "description": "A copy butoon with smooth animation.",
+  "dependencies": [],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ritu/blocks/copy-button-01/components/copy-button-01.tsx",
+      "content": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\nimport { Check, Copy } from \"lucide-react\";\r\n\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { useCopyToClipboard } from \"@/registry/ritu/blocks/copy-button-01/hooks/use-copy-to-clipboard\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ntype Props = {\r\n  value: string;\r\n  className?: string;\r\n};\r\n\r\nexport function CopyInput({ value = \"Thanks me letter for my work\", className }: Props) {\r\n  const [isCopied, setCopied] = useState(false);\r\n  const [, copy] = useCopyToClipboard();\r\n\r\n  const handleClipboard = () => {\r\n    setCopied(true);\r\n\r\n    copy(value);\r\n\r\n    setTimeout(() => {\r\n      setCopied(false);\r\n    }, 2000);\r\n  };\r\n\r\n  return (\r\n    <Button type=\"button\" variant={\"outline\"} onClick={handleClipboard} className={cn(\"relative\", className)}>\r\n      <div className=\"truncate pr-8 text-sm\">{value}</div>\r\n\r\n      <motion.div\r\n        className=\"absolute top-2.5 right-4\"\r\n        initial={{ opacity: 1, scale: 1 }}\r\n        animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}\r\n      >\r\n        <Copy className=\"text-foreground\" />\r\n      </motion.div>\r\n\r\n      <motion.div\r\n        className=\"absolute top-2.5 right-4\"\r\n        initial={{ opacity: 0, scale: 0 }}\r\n        animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}\r\n      >\r\n        <Check className=\"text-foreground\" />\r\n      </motion.div>\r\n    </Button>\r\n  );\r\n}\r\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src/registry/ritu/blocks/copy-button-01/hooks/use-copy-to-clipboard.ts",
+      "content": "import { useCallback, useState } from \"react\";\r\n\r\ntype CopiedValue = string | null;\r\n\r\ntype CopyFn = (text: string) => Promise<boolean>;\r\n\r\nexport function useCopyToClipboard(): [CopiedValue, CopyFn] {\r\n  const [copiedText, setCopiedText] = useState<CopiedValue>(null);\r\n\r\n  const copy: CopyFn = useCallback(async (text) => {\r\n    if (!navigator?.clipboard) {\r\n      console.warn(\"Clipboard not supported\");\r\n      return false;\r\n    }\r\n\r\n    // Try to save to clipboard then save it in the state if worked\r\n    try {\r\n      await navigator.clipboard.writeText(text);\r\n      setCopiedText(text);\r\n      return true;\r\n    } catch (error) {\r\n      console.warn(\"Copy failed\", error);\r\n      setCopiedText(null);\r\n      return false;\r\n    }\r\n  }, []);\r\n\r\n  return [copiedText, copy];\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ],
+  "meta": {
+    "iframeHeight": "600px",
+    "container": "w-full min-h-svh flex px-6 py-12 items-start md:pt-20 justify-center min-w-0 xl:py-24",
+    "mobile": "component"
+  },
+  "categories": [
+    "utilities"
+  ]
+}

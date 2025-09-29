@@ -31,4 +31,34 @@ export const Index: Record<string, any> = {
     categories: ["login"],
     meta: undefined,
   },
+  "copy-button-01": {
+    name: "copy-button-01",
+    description: "A copy butoon with smooth animation.",
+    type: "registry:block",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "src/registry/ritu/blocks/copy-button-01/components/copy-button-01.tsx",
+        type: "registry:component",
+        target: "",
+      },
+      {
+        path: "src/registry/ritu/blocks/copy-button-01/hooks/use-copy-to-clipboard.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ritu/blocks/copy-button-01/components/copy-button-01.tsx");
+      const exportName =
+        Object.keys(mod).find((key) => typeof mod[key] === "function" || typeof mod[key] === "object") || item.name;
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["utilities"],
+    meta: {
+      iframeHeight: "600px",
+      container: "w-full min-h-svh flex px-6 py-12 items-start md:pt-20 justify-center min-w-0 xl:py-24",
+      mobile: "component",
+    },
+  },
 };

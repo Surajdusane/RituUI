@@ -27,4 +27,11 @@ export const registryCategories = [
     hidden: false,
     isNew: false,
   },
+  {
+    name: "Utilities",
+    description: "just utilities",
+    slug: "utilities",
+    hidden: false,
+    isNew: false,
+  },
 ];
