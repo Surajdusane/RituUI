@@ -7,12 +7,7 @@
       "type": "registry:block",
       "description": "A login for its just a test desciption.",
       "dependencies": [],
-      "registryDependencies": [
-        "label",
-        "card",
-        "button",
-        "input"
-      ],
+      "registryDependencies": ["label", "card", "button", "input"],
       "files": [
         {
           "path": "src/registry/ritu/blocks/login-form-1/page.tsx",
@@ -24,9 +19,30 @@
           "type": "registry:component"
         }
       ],
-      "categories": [
-        "login"
-      ]
+      "categories": ["login"]
+    },
+    {
+      "name": "copy-button-01",
+      "type": "registry:block",
+      "description": "A copy butoon with smooth animation.",
+      "dependencies": [],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/registry/ritu/blocks/copy-button-01/components/copy-button-01.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/registry/ritu/blocks/copy-button-01/hooks/use-copy-to-clipboard.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "meta": {
+        "iframeHeight": "600px",
+        "container": "w-full min-h-svh flex px-6 py-12 items-start md:pt-20 justify-center min-w-0 xl:py-24",
+        "mobile": "component"
+      },
+      "categories": ["utilities"]
     }
   ]
 }
