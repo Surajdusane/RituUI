@@ -15,7 +15,7 @@ export const CategoryCard = ({ slug,
     isNew = false,
 }: CategoryCardProps) => {
     return (
-        <Link href={`/docs/${slug}`}>
+        <Link href={`/${slug}`}>
             <Card className='rounded-none h-full'>
                 <CardHeader className='flex justify-between items-center'>
                     <CardTitle className="text-lg font-semibold">{name}</CardTitle>
