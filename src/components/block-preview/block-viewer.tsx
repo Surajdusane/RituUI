@@ -1,8 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Image from "next/image"
-import Link from "next/link"
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { registryItemFileSchema, registryItemSchema } from "@/schema/shadcn";
+import { ImperativePanelHandle } from "react-resizable-panels";
+import { z } from "zod";
+
 import {
   Check,
   ChevronRight,
@@ -14,29 +18,12 @@ import {
   RotateCw,
   Smartphone,
   Tablet,
-  Terminal,
-} from "lucide-react"
-import { ImperativePanelHandle } from "react-resizable-panels"
-import { registryItemFileSchema, registryItemSchema } from "@/schema/shadcn"
-import { z } from "zod"
+} from "lucide-react";
 
-import { createFileTreeForRegistryItemFiles, FileTree } from "@/lib/registry"
-import { cn } from "@/lib/utils"
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-import { getIconForLanguageExtension } from "@/components/global/icons"
-import { OpenInV0Button } from "@/components/block-preview/open-in-v0-button"
-import { Button } from "@/components/ui/button"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable"
-import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarGroup,
@@ -47,38 +34,42 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarProvider,
-} from "@/components/ui/sidebar"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@/components/ui/toggle-group"
+} from "@/components/ui/sidebar";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { OpenInV0Button } from "@/components/block-preview/open-in-v0-button";
+import { PackageCopyButton } from "@/components/block-preview/package-copy-button";
+import { getIconForLanguageExtension } from "@/components/global/icons";
+import { createFileTreeForRegistryItemFiles, FileTree } from "@/lib/registry";
+import { cn } from "@/lib/utils";
+
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
 type BlockViewerContext = {
-  item: z.infer<typeof registryItemSchema>
-  view: "code" | "preview"
-  setView: (view: "code" | "preview") => void
-  activeFile: string | null
-  setActiveFile: (file: string) => void
-  resizablePanelRef: React.RefObject<ImperativePanelHandle | null> | null
-  tree: ReturnType<typeof createFileTreeForRegistryItemFiles> | null
+  item: z.infer<typeof registryItemSchema>;
+  view: "code" | "preview";
+  setView: (view: "code" | "preview") => void;
+  activeFile: string | null;
+  setActiveFile: (file: string) => void;
+  resizablePanelRef: React.RefObject<ImperativePanelHandle | null> | null;
+  tree: ReturnType<typeof createFileTreeForRegistryItemFiles> | null;
   highlightedFiles:
     | (z.infer<typeof registryItemFileSchema> & {
-        highlightedContent: string
+        highlightedContent: string;
       })[]
-    | null
-  iframeKey?: number
-  setIframeKey?: React.Dispatch<React.SetStateAction<number>>
-}
+    | null;
+  iframeKey?: number;
+  setIframeKey?: React.Dispatch<React.SetStateAction<number>>;
+};
 
-const BlockViewerContext = React.createContext<BlockViewerContext | null>(null)
+const BlockViewerContext = React.createContext<BlockViewerContext | null>(null);
 
 function useBlockViewer() {
-  const context = React.useContext(BlockViewerContext)
+  const context = React.useContext(BlockViewerContext);
   if (!context) {
-    throw new Error("useBlockViewer must be used within a BlockViewerProvider.")
+    throw new Error("useBlockViewer must be used within a BlockViewerProvider.");
   }
-  return context
+  return context;
 }
 
 function BlockViewerProvider({
@@ -87,14 +78,14 @@ function BlockViewerProvider({
   highlightedFiles,
   children,
 }: Pick<BlockViewerContext, "item" | "tree" | "highlightedFiles"> & {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const [view, setView] = React.useState<BlockViewerContext["view"]>("preview")
-  const [activeFile, setActiveFile] = React.useState<
-    BlockViewerContext["activeFile"]
-  >(highlightedFiles?.[0].target ?? null)
-  const resizablePanelRef = React.useRef<ImperativePanelHandle>(null)
-  const [iframeKey, setIframeKey] = React.useState(0)
+  const [view, setView] = React.useState<BlockViewerContext["view"]>("preview");
+  const [activeFile, setActiveFile] = React.useState<BlockViewerContext["activeFile"]>(
+    highlightedFiles?.[0].target ?? null
+  );
+  const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
+  const [iframeKey, setIframeKey] = React.useState(0);
 
   return (
     <BlockViewerContext.Provider
@@ -124,20 +115,15 @@ function BlockViewerProvider({
         {children}
       </div>
     </BlockViewerContext.Provider>
-  )
+  );
 }
 
 function BlockViewerToolbar() {
-  const { setView, view, item, resizablePanelRef, setIframeKey } =
-    useBlockViewer()
-  const { copyToClipboard, isCopied } = useCopyToClipboard()
+  const { setView, view, item, resizablePanelRef, setIframeKey } = useBlockViewer();
 
   return (
     <div className="hidden w-full items-center gap-2 pl-2 md:pr-6 lg:flex">
-      <Tabs
-        value={view}
-        onValueChange={(value) => setView(value as "preview" | "code")}
-      >
+      <Tabs value={view} onValueChange={(value) => setView(value as "preview" | "code")}>
         <TabsList className="grid h-8 grid-cols-2 items-center rounded-md p-1 *:data-[slot=tabs-trigger]:h-6 *:data-[slot=tabs-trigger]:rounded-sm *:data-[slot=tabs-trigger]:px-2 *:data-[slot=tabs-trigger]:text-xs">
           <TabsTrigger value="preview">Preview</TabsTrigger>
           <TabsTrigger value="code">Code</TabsTrigger>
@@ -156,9 +142,9 @@ function BlockViewerToolbar() {
             type="single"
             defaultValue="100"
             onValueChange={(value) => {
-              setView("preview")
+              setView("preview");
               if (resizablePanelRef?.current) {
-                resizablePanelRef.current.resize(parseInt(value))
+                resizablePanelRef.current.resize(parseInt(value));
               }
             }}
             className="gap-1 *:data-[slot=toggle-group-item]:!size-6 *:data-[slot=toggle-group-item]:!rounded-sm"
@@ -173,13 +159,7 @@ function BlockViewerToolbar() {
               <Smartphone />
             </ToggleGroupItem>
             <Separator orientation="vertical" className="!h-4" />
-            <Button
-              size="icon"
-              variant="ghost"
-              className="size-6 rounded-sm p-0"
-              asChild
-              title="Open in New Tab"
-            >
+            <Button size="icon" variant="ghost" className="size-6 rounded-sm p-0" asChild title="Open in New Tab">
               <Link href={`/view/${item.name}`} target="_blank">
                 <span className="sr-only">Open in New Tab</span>
                 <Fullscreen />
@@ -193,7 +173,7 @@ function BlockViewerToolbar() {
               title="Refresh Preview"
               onClick={() => {
                 if (setIframeKey) {
-                  setIframeKey((k) => k + 1)
+                  setIframeKey((k) => k + 1);
                 }
               }}
             >
@@ -203,7 +183,7 @@ function BlockViewerToolbar() {
           </ToggleGroup>
         </div>
         <Separator orientation="vertical" className="mx-1 !h-4" />
-        <Button
+        {/* <Button
           variant="outline"
           className="w-fit gap-1 px-2 shadow-none"
           size="sm"
@@ -212,17 +192,19 @@ function BlockViewerToolbar() {
           }}
         >
           {isCopied ? <Check /> : <Terminal />}
+          <span>Copy to Clipboard</span>
           <span>npx shadcn add {item.name}</span>
-        </Button>
+        </Button> */}
+        <PackageCopyButton name={item.name} />
         <Separator orientation="vertical" className="mx-1 !h-4" />
         <OpenInV0Button name={item.name} />
       </div>
     </div>
-  )
+  );
 }
 
 function BlockViewerIframe({ className }: { className?: string }) {
-  const { item, iframeKey } = useBlockViewer()
+  const { item, iframeKey } = useBlockViewer();
 
   return (
     <iframe
@@ -230,16 +212,13 @@ function BlockViewerIframe({ className }: { className?: string }) {
       src={`/view/${item.name}`}
       height={item.meta?.iframeHeight ?? 930}
       loading="lazy"
-      className={cn(
-        "bg-background no-scrollbar relative z-20 w-full",
-        className
-      )}
+      className={cn("bg-background no-scrollbar relative z-20 w-full", className)}
     />
-  )
+  );
 }
 
 function BlockViewerView() {
-  const { resizablePanelRef } = useBlockViewer()
+  const { resizablePanelRef } = useBlockViewer();
 
   return (
     <div className="hidden group-data-[view=code]/block-view-wrapper:hidden md:h-(--height) lg:flex">
@@ -262,21 +241,17 @@ function BlockViewerView() {
         </ResizablePanelGroup>
       </div>
     </div>
-  )
+  );
 }
 
 function BlockViewerMobile({ children }: { children: React.ReactNode }) {
-  const { item } = useBlockViewer()
+  const { item } = useBlockViewer();
 
   return (
     <div className="flex flex-col gap-2 lg:hidden">
       <div className="flex items-center gap-2 px-2">
-        <div className="line-clamp-1 text-sm font-medium">
-          {item.description}
-        </div>
-        <div className="text-muted-foreground ml-auto shrink-0 font-mono text-xs">
-          {item.name}
-        </div>
+        <div className="line-clamp-1 text-sm font-medium">{item.description}</div>
+        <div className="text-muted-foreground ml-auto shrink-0 font-mono text-xs">{item.name}</div>
       </div>
       {item.meta?.mobile === "component" ? (
         children
@@ -301,21 +276,21 @@ function BlockViewerMobile({ children }: { children: React.ReactNode }) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 function BlockViewerCode() {
-  const { activeFile, highlightedFiles } = useBlockViewer()
+  const { activeFile, highlightedFiles } = useBlockViewer();
 
   const file = React.useMemo(() => {
-    return highlightedFiles?.find((file) => file.target === activeFile)
-  }, [highlightedFiles, activeFile])
+    return highlightedFiles?.find((file) => file.target === activeFile);
+  }, [highlightedFiles, activeFile]);
 
   if (!file) {
-    return null
+    return null;
   }
 
-  const language = file.path.split(".").pop() ?? "tsx"
+  const language = file.path.split(".").pop() ?? "tsx";
 
   return (
     <div className="bg-code text-code-foreground mr-[14px] flex overflow-hidden rounded-xl border group-data-[view=preview]/block-view-wrapper:hidden md:h-(--height)">
@@ -343,22 +318,20 @@ function BlockViewerCode() {
         />
       </figure>
     </div>
-  )
+  );
 }
 
 export function BlockViewerFileTree() {
-  const { tree } = useBlockViewer()
+  const { tree } = useBlockViewer();
 
   if (!tree) {
-    return null
+    return null;
   }
 
   return (
     <SidebarProvider className="flex !min-h-full flex-col border-r">
       <Sidebar collapsible="none" className="w-full flex-1">
-        <SidebarGroupLabel className="h-12 rounded-none border-b px-4 text-sm">
-          Files
-        </SidebarGroupLabel>
+        <SidebarGroupLabel className="h-12 rounded-none border-b px-4 text-sm">Files</SidebarGroupLabel>
         <SidebarGroup className="p-0">
           <SidebarGroupContent>
             <SidebarMenu className="translate-x-0 gap-1.5">
@@ -370,11 +343,11 @@ export function BlockViewerFileTree() {
         </SidebarGroup>
       </Sidebar>
     </SidebarProvider>
-  )
+  );
 }
 
 function Tree({ item, index }: { item: FileTree; index: number }) {
-  const { activeFile, setActiveFile } = useBlockViewer()
+  const { activeFile, setActiveFile } = useBlockViewer();
 
   if (!item.children) {
     return (
@@ -395,15 +368,12 @@ function Tree({ item, index }: { item: FileTree; index: number }) {
           {item.name}
         </SidebarMenuButton>
       </SidebarMenuItem>
-    )
+    );
   }
 
   return (
     <SidebarMenuItem>
-      <Collapsible
-        className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90"
-        defaultOpen
-      >
+      <Collapsible className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90" defaultOpen>
         <CollapsibleTrigger asChild>
           <SidebarMenuButton
             className="hover:bg-muted-foreground/15 focus:bg-muted-foreground/15 focus-visible:bg-muted-foreground/15 active:bg-muted-foreground/15 data-[active=true]:bg-muted-foreground/15 rounded-none pl-(--index) whitespace-nowrap"
@@ -427,21 +397,21 @@ function Tree({ item, index }: { item: FileTree; index: number }) {
         </CollapsibleContent>
       </Collapsible>
     </SidebarMenuItem>
-  )
+  );
 }
 
 function BlockCopyCodeButton() {
-  const { activeFile, item } = useBlockViewer()
-  const { copyToClipboard, isCopied } = useCopyToClipboard()
+  const { activeFile, item } = useBlockViewer();
+  const { copyToClipboard, isCopied } = useCopyToClipboard();
 
   const file = React.useMemo(() => {
-    return item.files?.find((file) => file.target === activeFile)
-  }, [activeFile, item.files])
+    return item.files?.find((file) => file.target === activeFile);
+  }, [activeFile, item.files]);
 
-  const content = file?.content
+  const content = file?.content;
 
   if (!content) {
-    return null
+    return null;
   }
 
   return (
@@ -450,12 +420,12 @@ function BlockCopyCodeButton() {
       size="icon"
       className="size-7"
       onClick={() => {
-        copyToClipboard(content)
+        copyToClipboard(content);
       }}
     >
       {isCopied ? <Check /> : <Clipboard />}
     </Button>
-  )
+  );
 }
 
 function BlockViewer({
@@ -465,21 +435,16 @@ function BlockViewer({
   children,
   ...props
 }: Pick<BlockViewerContext, "item" | "tree" | "highlightedFiles"> & {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <BlockViewerProvider
-      item={item}
-      tree={tree}
-      highlightedFiles={highlightedFiles}
-      {...props}
-    >
+    <BlockViewerProvider item={item} tree={tree} highlightedFiles={highlightedFiles} {...props}>
       <BlockViewerToolbar />
       <BlockViewerView />
       <BlockViewerCode />
       <BlockViewerMobile>{children}</BlockViewerMobile>
     </BlockViewerProvider>
-  )
+  );
 }
 
-export { BlockViewer }
+export { BlockViewer };

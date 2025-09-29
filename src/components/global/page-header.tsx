@@ -1,10 +1,6 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-function PageHeader({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<"section">) {
+function PageHeader({ className, children, ...props }: React.ComponentProps<"section">) {
   return (
     <section className={cn("border-grid", className)} {...props}>
       <div className="container-wrapper">
@@ -13,13 +9,10 @@ function PageHeader({
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-function PageHeaderHeading({
-  className,
-  ...props
-}: React.ComponentProps<"h1">) {
+function PageHeaderHeading({ className, ...props }: React.ComponentProps<"h1">) {
   return (
     <h1
       className={cn(
@@ -28,34 +21,20 @@ function PageHeaderHeading({
       )}
       {...props}
     />
-  )
+  );
 }
 
-function PageHeaderDescription({
-  className,
-  ...props
-}: React.ComponentProps<"p">) {
-  return (
-    <p
-      className={cn(
-        "text-foreground max-w-3xl text-base text-balance sm:text-lg",
-        className
-      )}
-      {...props}
-    />
-  )
+function PageHeaderDescription({ className, ...props }: React.ComponentProps<"p">) {
+  return <p className={cn("text-foreground max-w-3xl text-base text-balance sm:text-lg", className)} {...props} />;
 }
 
 function PageActions({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn(
-        "flex w-full items-center justify-center gap-2 pt-2 **:data-[slot=button]:shadow-none",
-        className
-      )}
+      className={cn("flex w-full items-center justify-center gap-2 pt-2 **:data-[slot=button]:shadow-none", className)}
       {...props}
     />
-  )
+  );
 }
 
-export { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading }
+export { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading };

@@ -1,8 +1,8 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import { ComponentPreviewTabs } from "@/components/block-preview/component-preview-tabs"
-import { ComponentSource } from "@/components/block-preview/component-source"
-import { Index } from "@/registry/__index__"
+import { ComponentPreviewTabs } from "@/components/block-preview/component-preview-tabs";
+import { ComponentSource } from "@/components/block-preview/component-source";
+import { Index } from "@/registry/__index__";
 
 export function ComponentPreview({
   name,
@@ -12,24 +12,21 @@ export function ComponentPreview({
   hideCode = false,
   ...props
 }: React.ComponentProps<"div"> & {
-  name: string
-  align?: "center" | "start" | "end"
-  description?: string
-  hideCode?: boolean
-  type?: "block" | "component" | "example"
+  name: string;
+  align?: "center" | "start" | "end";
+  description?: string;
+  hideCode?: boolean;
+  type?: "block" | "component" | "example";
 }) {
-  const Component = Index[name]?.component
+  const Component = Index[name]?.component;
 
   if (!Component) {
     return (
       <p className="text-muted-foreground text-sm">
-        Component{" "}
-        <code className="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">
-          {name}
-        </code>{" "}
+        Component <code className="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">{name}</code>{" "}
         not found in registry.
       </p>
-    )
+    );
   }
 
   if (type === "block") {
@@ -53,7 +50,7 @@ export function ComponentPreview({
           <iframe src={`/view/${name}`} className="size-full" />
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -65,5 +62,5 @@ export function ComponentPreview({
       source={<ComponentSource name={name} collapsible={false} />}
       {...props}
     />
-  )
+  );
 }

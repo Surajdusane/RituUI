@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 export function ComponentPreviewTabs({
   className,
@@ -13,23 +13,16 @@ export function ComponentPreviewTabs({
   source,
   ...props
 }: React.ComponentProps<"div"> & {
-  align?: "center" | "start" | "end"
-  hideCode?: boolean
-  component: React.ReactNode
-  source: React.ReactNode
+  align?: "center" | "start" | "end";
+  hideCode?: boolean;
+  component: React.ReactNode;
+  source: React.ReactNode;
 }) {
-  const [tab, setTab] = React.useState("preview")
+  const [tab, setTab] = React.useState("preview");
 
   return (
-    <div
-      className={cn("group relative mt-4 mb-12 flex flex-col gap-2", className)}
-      {...props}
-    >
-      <Tabs
-        className="relative mr-auto w-full"
-        value={tab}
-        onValueChange={setTab}
-      >
+    <div className={cn("group relative mt-4 mb-12 flex flex-col gap-2", className)} {...props}>
+      <Tabs className="relative mr-auto w-full" value={tab} onValueChange={setTab}>
         <div className="flex items-center justify-between">
           {!hideCode && (
             <TabsList className="justify-start gap-4 rounded-none bg-transparent px-2 md:px-0">
@@ -49,15 +42,8 @@ export function ComponentPreviewTabs({
           )}
         </div>
       </Tabs>
-      <div
-        data-tab={tab}
-        className="data-[tab=code]:border-code relative rounded-lg border md:-mx-1"
-      >
-        <div
-          data-slot="preview"
-          data-active={tab === "preview"}
-          className="invisible data-[active=true]:visible"
-        >
+      <div data-tab={tab} className="data-[tab=code]:border-code relative rounded-lg border md:-mx-1">
+        <div data-slot="preview" data-active={tab === "preview"} className="invisible data-[active=true]:visible">
           <div
             data-align={align}
             className={cn(
@@ -76,5 +62,5 @@ export function ComponentPreviewTabs({
         </div>
       </div>
     </div>
-  )
+  );
 }

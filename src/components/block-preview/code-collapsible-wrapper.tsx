@@ -1,22 +1,14 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
-export function CodeCollapsibleWrapper({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof Collapsible>) {
-  const [isOpened, setIsOpened] = React.useState(false)
+export function CodeCollapsibleWrapper({ className, children, ...props }: React.ComponentProps<typeof Collapsible>) {
+  const [isOpened, setIsOpened] = React.useState(false);
 
   return (
     <Collapsible
@@ -27,11 +19,7 @@ export function CodeCollapsibleWrapper({
     >
       <CollapsibleTrigger asChild>
         <div className="absolute top-1.5 right-9 z-10 flex items-center">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground h-7 rounded-md px-2"
-          >
+          <Button variant="ghost" size="sm" className="text-muted-foreground h-7 rounded-md px-2">
             {isOpened ? "Collapse" : "Expand"}
           </Button>
           <Separator orientation="vertical" className="mx-1.5 !h-4" />
@@ -47,5 +35,5 @@ export function CodeCollapsibleWrapper({
         {isOpened ? "Collapse" : "Expand"}
       </CollapsibleTrigger>
     </Collapsible>
-  )
+  );
 }
