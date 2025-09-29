@@ -3,6 +3,9 @@ import { getAllBlockIds } from "@/lib/blocks"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 
+export const revalidate = false
+export const dynamic = "force-static"
+export const dynamicParams = false
 
 import {
   PageHeader,
