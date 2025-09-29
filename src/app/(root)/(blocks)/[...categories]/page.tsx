@@ -7,14 +7,22 @@ export const revalidate = false
 export const dynamic = "force-static"
 export const dynamicParams = false
 
+export async function generateStaticParams() {
+  return registryCategories.map((category) => ({
+    categories: [category.slug],
+  }))
+}
+
+
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading
 } from "@/components/global/page-header"
+import { registryCategories } from "@/registry/registry-categories"
 
 type Props = {
-    params: Promise<{ categories?: string }>
+    params: Promise<{ categories?: string[] }>
 }
 
 const title = "Building Blocks for the Web"
@@ -59,14 +67,14 @@ const page = async ({ params }: Props) => {
     if (!categories) {
         notFound()
     }
-    const blocks = await getAllBlockIds(["registry:block"], [categories])
+    const blocks = await getAllBlockIds(["registry:block"], categories)
 
 
     return (
         <div>
             <PageHeader>
-                <PageHeaderHeading>{categories.toUpperCase()}</PageHeaderHeading>
-                <PageHeaderDescription>{getDescription(categories, blocks.length)}</PageHeaderDescription>
+                <PageHeaderHeading>{categories[0].toUpperCase()}</PageHeaderHeading>
+                <PageHeaderDescription>{getDescription(categories[0], blocks.length)}</PageHeaderDescription>
             </PageHeader>
             <div className="container-wrapper section-soft flex-1 md:py-12">
                 <div className="container">
