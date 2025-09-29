@@ -42,7 +42,7 @@ export const PackageCopyButton = ({ name }: { name: string }) => {
         <MenubarContent>
           <MenubarItem
             onClick={() => {
-              copyToClipboard(`npx shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}`);
+              copyToClipboard(`npx shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}.json`);
             }}
           >
             npm
@@ -50,7 +50,7 @@ export const PackageCopyButton = ({ name }: { name: string }) => {
           <MenubarSeparator />
           <MenubarItem
             onClick={() => {
-              copyToClipboard(`bunx --bun shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}`);
+              copyToClipboard(`bunx --bun shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}.json`);
             }}
           >
             bun
@@ -58,7 +58,7 @@ export const PackageCopyButton = ({ name }: { name: string }) => {
           <MenubarSeparator />
           <MenubarItem
             onClick={() => {
-              copyToClipboard(`yarn shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}`);
+              copyToClipboard(`yarn shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}.json`);
             }}
           >
             yarn
@@ -66,7 +66,7 @@ export const PackageCopyButton = ({ name }: { name: string }) => {
           <MenubarSeparator />
           <MenubarItem
             onClick={() => {
-              copyToClipboard(`pnpm dlx shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}`);
+              copyToClipboard(`pnpm dlx shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${name}.json`);
             }}
           >
             pnpm
