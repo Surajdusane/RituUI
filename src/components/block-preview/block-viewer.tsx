@@ -208,7 +208,7 @@ function BlockViewerToolbar() {
           className="w-fit gap-1 px-2 shadow-none"
           size="sm"
           onClick={() => {
-            copyToClipboard(`npx shadcn@latest add ${item.name}`)
+            copyToClipboard(`npx shadcn@latest add ${process.env.NEXT_PUBLIC_APP_URL}/r/${item.name}`)
           }}
         >
           {isCopied ? <Check /> : <Terminal />}
