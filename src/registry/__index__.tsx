@@ -7,24 +7,24 @@ import * as React from "react"
 export const Index: Record<string, any> = {
   "login-form-1": {
     name: "login-form-1",
-    description: "A simple login form.",
+    description: "A login for its just a test desciption.",
     type: "registry:block",
-    registryDependencies: ["button","card","input","label"],
+    registryDependencies: ["label","card","button","input"],
     files: [{
       path: "src/registry/ritu/blocks/login-form-1/page.tsx",
       type: "registry:page",
-      target: "app/login/page.tsx"
+      target: "app/testrui/page.tsx"
     },{
       path: "src/registry/ritu/blocks/login-form-1/components/login-form.tsx",
       type: "registry:component",
-      target: ""
+      target: "app/components/ritutest/login-form.tsx"
     }],
     component: React.lazy(async () => {
       const mod = await import("@/registry/ritu/blocks/login-form-1/page.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
-    categories: ["authentication","login"],
+    categories: ["login"],
     meta: undefined,
   },
   }
