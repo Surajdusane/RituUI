@@ -21,8 +21,7 @@
         },
         {
           "path": "src/registry/ritu/blocks/login-form-1/components/login-form.tsx",
-          "type": "registry:component",
-          "target": "app/components/ritutest/login-form.tsx"
+          "type": "registry:component"
         }
       ],
       "categories": [
