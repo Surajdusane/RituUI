@@ -1,14 +1,15 @@
-import Link from "next/link"
-import { ArrowRightIcon } from "lucide-react"
+import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge"
+import { ArrowRightIcon } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
 
 export function Announcement() {
   return (
     <Badge asChild variant="secondary" className="rounded-full">
       <Link href="/docs/changelog">
-        Now available: shadcn CLI 3.0 and MCP Server <ArrowRightIcon />
+        Last Update on <span className="font-semibold">2023-05-01</span> <ArrowRightIcon />
       </Link>
     </Badge>
-  )
+  );
 }

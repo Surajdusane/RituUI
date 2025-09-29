@@ -1,1 +1,1 @@
-export { CategoryCard } from './category-card'
+export { CategoryCard } from "./category-card";

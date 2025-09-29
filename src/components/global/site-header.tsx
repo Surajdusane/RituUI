@@ -3,18 +3,19 @@ import Link from "next/link";
 // import blocks from "@/registry/__blocks__.json"
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import ThemeToggle from "./theme-toggle";
 import { Logo } from "@/components/global/logo";
+
+import ThemeToggle from "./theme-toggle";
 
 export function SiteHeader() {
   return (
-    <header className="mx-auto max-w-5xl px-6 w-full">
+    <header className="mx-auto w-full max-w-5xl px-6">
       <nav className="flex items-center justify-between gap-4 py-4">
         <Link
           className={buttonVariants({
             variant: "ghost",
             size: "sm",
-            className: "max-lg:-ml-4 h-10",
+            className: "h-10 max-lg:-ml-4",
           })}
           href="/"
         >
@@ -30,7 +31,7 @@ export function SiteHeader() {
               target="_blank"
             >
               <svg
-                className="size-4 fill-primary"
+                className="fill-primary size-4"
                 fill="none"
                 height="1024"
                 viewBox="0 0 1024 1024"

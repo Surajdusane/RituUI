@@ -1,19 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { CheckIcon, ClipboardIcon } from "lucide-react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { CheckIcon, ClipboardIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 export function copyToClipboardWithMeta(value: string, event?: Event) {
-  navigator.clipboard.writeText(value)
-  if (event) {}
+  navigator.clipboard.writeText(value);
+  if (event) {
+  }
 }
 
 export function CopyButton({
@@ -22,16 +20,16 @@ export function CopyButton({
   variant = "ghost",
   ...props
 }: React.ComponentProps<typeof Button> & {
-  value: string
-  src?: string
+  value: string;
+  src?: string;
 }) {
-  const [hasCopied, setHasCopied] = React.useState(false)
+  const [hasCopied, setHasCopied] = React.useState(false);
 
   React.useEffect(() => {
     setTimeout(() => {
-      setHasCopied(false)
-    }, 2000)
-  }, [])
+      setHasCopied(false);
+    }, 2000);
+  }, []);
 
   return (
     <Tooltip>
@@ -45,10 +43,8 @@ export function CopyButton({
             className
           )}
           onClick={() => {
-            copyToClipboardWithMeta(
-              value,
-            )
-            setHasCopied(true)
+            copyToClipboardWithMeta(value);
+            setHasCopied(true);
           }}
           {...props}
         >
@@ -56,9 +52,7 @@ export function CopyButton({
           {hasCopied ? <CheckIcon /> : <ClipboardIcon />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>
-        {hasCopied ? "Copied" : "Copy to Clipboard"}
-      </TooltipContent>
+      <TooltipContent>{hasCopied ? "Copied" : "Copy to Clipboard"}</TooltipContent>
     </Tooltip>
-  )
+  );
 }

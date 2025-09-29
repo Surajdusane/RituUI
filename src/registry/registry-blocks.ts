@@ -1,18 +1,12 @@
-import { type Registry } from "@/schema/shadcn"
+import { type Registry } from "@/schema/shadcn";
 
 export const blocks: Registry["items"] = [
   {
     name: "login-form-1",
     type: "registry:block",
     description: "A login for its just a test desciption.",
-    dependencies: [
-    ],
-    registryDependencies: [
-      "label",
-      "card",
-      "button",
-      "input",
-    ],
+    dependencies: [],
+    registryDependencies: ["label", "card", "button", "input"],
     files: [
       {
         path: "blocks/login-form-1/page.tsx",
@@ -26,5 +20,4 @@ export const blocks: Registry["items"] = [
     ],
     categories: ["login"],
   },
-]
-
+];
