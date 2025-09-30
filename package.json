@@ -12,7 +12,8 @@
     "registry:generate": "bun src/scripts/build-registry.mts",
     "registry:capture": "bun src/scripts/capture-registry.mts",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
+    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
+    "prepare": "husky"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^15.5.4",
