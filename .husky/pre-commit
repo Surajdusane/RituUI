@@ -1,5 +1,2 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # Run Prettier before commit using Bun
 bun run format:write

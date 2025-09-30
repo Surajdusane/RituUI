@@ -1,8 +1,6 @@
-import { Check } from "lucide-react";
-
 import { motion } from "framer-motion";
 
-import { Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 
 import {
   Menubar,
@@ -22,20 +20,20 @@ export const PackageCopyButton = ({ name }: { name: string }) => {
       <MenubarMenu>
         <MenubarTrigger className="relative">
           <motion.div
-        className="absolute"
-        initial={{ opacity: 1, scale: 1 }}
-        animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}
-      >
-        <Copy className="text-foreground size-4" />
-      </motion.div>
+            className="absolute"
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}
+          >
+            <Copy className="text-foreground size-4" />
+          </motion.div>
 
-      <motion.div
-        className="absolute"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
-      >
-        <Check className="text-foreground size-4" />
-      </motion.div>
+          <motion.div
+            className="absolute"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
+          >
+            <Check className="text-foreground size-4" />
+          </motion.div>
           <span className="ml-5">Copy</span>
           {/* <span>npx shadcn add {item.name}</span> */}
         </MenubarTrigger>
